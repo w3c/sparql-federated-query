@@ -1,56 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>SPARQL 1.2 Federated Query</title>
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<html lang="EN">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>SPARQL 1.1 Federated Query</title>
+  <style type="text/css">
 
-    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
-    <script src="./common/local-biblio.js" class="remove"></script>
-    <script src="./common/fixup.js" class="remove"></script>
-
-    <script class="remove">
-      // All config options at https://respec.org/docs/
-      var respecConfig = {
-        group:                "rdf-star" ,
-        localBiblio:          localBibliography,
-        specStatus:           "ED",
-        edDraftURI:           "https://w3c.github.io/sparql12-federated-query/spec/",
-        testSuiteURI:         "https://w3c.github.io/rdf-tests/",
-        shortName:            "sparql12-federated-query",
-        copyrightStart:       "2008",
-         
-        github:               "https://github.com/w3c/sparql-federated-query",
-        wgPublicList:         "public-rdf-star-wg",
-
-//        implementationReportURI: "https://w3c.github.io/sparql12-federated-query/reports/",
-//        errata:               "https://w3c.github.io/sparql12-federated-query/errata/",
-
-        previousPublishDate:  "2013-03-21",
-        prevRecURI:           "https://www.w3.org/TR/2013/REC-sparql11-federated-query-20130321",
-        prevRecShortname:     "sparql11-federated-query",
-        previousPublishDate:  "2013-03-21",
-        previousMaturity:     "REC",
-        
-         editors: [
-           { name: "RDF Star Working Group" }
-         ],
-        formerEditors: [
-          { name: "Eric Prud'hommeaux" },
-          { name: "Carlos Buil-Aranda" },
-        ],
-
-        //doJsonLd:     true,
-        
-        lint: { "no-unused-dfns": false }
-      };
-    </script>
-
-    <style type="text/css">
-      @import url("local.css");
-
-      /* ReSpec */
-      dfn { font-style: normal ; }
-      /* ReSpec */
+  @import url("local.css");
 
   code           { font-family: monospace; }
 
@@ -85,64 +41,128 @@
   em.rfc2119 { text-transform: lowercase;
              font-variant: small-caps;
              font-style: normal; }
-    </style>
-  </head>
-  <body>
-    <section id="abstract">
-      <h2>Abstract</h2>
-<p>RDF is a directed, labeled graph data format for representing information in the Web. SPARQL can be used to express queries across diverse data sources, whether the data is stored natively as
+  </style>
+  <link rel="stylesheet" type="text/css" href="http://www.w3.org/StyleSheets/TR/W3C-REC.css">
+</head>
+<body>
+  <div class="head">
+    <p><a href="http://www.w3.org/"><img src="SPARQL%201.1%20Federated%20Query_files/w3c_home.svg" alt="W3C" width="72" height="48"></a></p>
+    <h1><a name="title" id="title"></a>SPARQL 1.1 Federated Query</h1>
+    <h2><a name="w3c-doctype" id="w3c-doctype"></a>W3C Recommendation 21 March 2013</h2>
+    <dl>
+      <dt>This version:</dt>
+      <dd><a href="http://www.w3.org/TR/2013/REC-sparql11-federated-query-20130321/">http://www.w3.org/TR/2013/REC-sparql11-federated-query-20130321/</a></dd>
+      <dt>Latest version:</dt>
+      <dd><a href="http://www.w3.org/TR/sparql11-federated-query/">http://www.w3.org/TR/sparql11-federated-query/</a></dd>
+      <dt>Previous version:</dt>
+      <dd><a href="http://www.w3.org/TR/2012/PR-sparql11-federated-query-20121108/">http://www.w3.org/TR/2012/PR-sparql11-federated-query-20121108/</a></dd>
+      <dt>Editors:</dt>
+      <dd>Eric Prud'hommeaux, W3C <a href="mailto:eric@w3.org">&lt;eric@w3.org&gt;</a></dd>
+      <dd>Carlos Buil-Aranda, Ontology Engineering Group, UPM, Spain; currently at Universidad Pontificia Católica de Chile</dd>
+      <dt>Contributors:</dt>
+      <dd>Andy Seaborne, The Apache Software Foundation</dd>
+      <dd>Axel Polleres, Siemens AG <a href="mailto:axel.polleres@siemens.com">&lt;axel.polleres@siemens.com&gt;</a></dd>
+      <dd>Lee Feigenbaum, Cambridge Semantics <a href="mailto:lee@thefigtrees.net">&lt;lee@thefigtrees.net&gt;</a></dd>
+      <dd>Gregory Todd Williams, Rensselaer Polytechnic Institute <a href="mailto:greg@evilfunhouse.com">&lt;greg@evilfunhouse.com&gt;</a></dd>
+    </dl>
+    <p>Please refer to the <a href="http://www.w3.org/2013/sparql-errata#sparql11-federated-query"><strong>errata</strong></a> for this document, which may include some normative corrections.</p>
+    <p>See also <a href="http://www.w3.org/2003/03/Translations/byTechnology?technology=sparql11-federated-query"><strong>translations</strong></a>.</p>
+    <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>&nbsp;©&nbsp;2013&nbsp;<a href="http://www.w3.org/"><acronym title=
+    "World Wide Web Consortium">W3C</acronym></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href=
+    "http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href=
+    "http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href=
+    "http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
+  </div>
+  <hr>
+  <div>
+    <h2><a name="abstract" id="abstract"></a>Abstract</h2>
+    <p>RDF is a directed, labeled graph data format for representing information in the Web. SPARQL can be used to express queries across diverse data sources, whether the data is stored natively as
     RDF or viewed as RDF via middleware. This specification defines the syntax and semantics of SPARQL 1.1 Federated Query extension for executing queries distributed over different SPARQL endpoints.
     The <code>SERVICE</code> keyword extends SPARQL 1.1 to support queries that merge data distributed across the Web.</p>
-    </section>
-
-    <section id="sotd" class="introductory">
-      <p>
-        This specification is published by the
-        <a href="https://www.w3.org/groups/wg/rdf-star">RDF Star Working Group</a> as part of the
-        update of specifications for format and errata.
-      </p>
-    </section>
-
-    <!--
-        @@ Includes too much - all RDF documents.
-    <section id="related" data-include="./common/related.html"></section>
-    -->
-
-    <section id="sparql12-documents" class="introductory">
-      <h2>SPARQL 1.2 Documents</h2>
-      <ul>
-        <li><a href="../../sparql-new/spec/index.html">SPARQL 1.2 New</a></li>
-        <li><a href="../../sparql-concepts/spec/index.html">SPARQL 1.2 Overview</a></li>
-        <li><a href="../../sparql-query/spec/index.html">SPARQL 1.2 Query Language</a></li>
-        <li><a href="../../sparql-update/spec/index.html">SPARQL 1.2 Update</a></li>
-        <li><a href="../../sparql-entailment/spec/index.html">SPARQL 1.2 Entailment Regimes</a></li>
-        <li><a href="../../sparql-service-description/spec/index.html">SPARQL 1.2 Service Description</a></li>
-        <li><a href="../../sparql-federated-query/spec/index.html">SPARQL 1.2 Federated Query</a></li>
-        <li><a href="../../sparql-results-json/spec/index.html">SPARQL 1.2 Query Results JSON Format</a></li>
-        <li><a href="../../sparql-results-csv-tsv/spec/index.html">SPARQL 1.2 Query Results CSV and TSV Formats</a></li>
-        <li><a href="../../sparql-results-xml/spec/index.html">SPARQL 1.2 Query Results XML Format</a></li>
-        <li><a href="../../sparql-graph-store-protocol/spec/index.html">SPARQL 1.2 Graph Store Protocol</a></li>
-        <li><a href="../../sparql-protocol/spec/index.html">SPARQL 1.2 Protocol</a></li>
-      </ul>
-    </section>
-    
-<!-- BODY -->
-    <section id="introduction">
-      <h2>Introduction</h2>
+  </div>
+  <div>
+    <h2><a name="status" id="status"></a>Status of this Document</h2>
+    <h4 id="may-be">May Be Superseded</h4>
+    <p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current W3C publications and the latest revision
+    of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at http://www.w3.org/TR/.</em></p>
+    <h4 id="related">Set of Documents</h4>
+    <p>This document is one of eleven SPARQL 1.1 Recommendations produced by the <a href="http://www.w3.org/2001/sw/DataAccess/">SPARQL Working Group</a>:</p>
+    <ol>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-overview-20130321">SPARQL 1.1 Overview</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321">SPARQL 1.1 Query Language</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-update-20130321">SPARQL 1.1 Update</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-service-description-20130321">SPARQL1.1 Service Description</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-federated-query-20130321">SPARQL 1.1 Federated Query</a> (this document)</li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-results-json-20130321">SPARQL 1.1 Query Results JSON Format</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-results-csv-tsv-20130321">SPARQL 1.1 Query Results CSV and TSV Formats</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-rdf-sparql-XMLres-20130321">SPARQL Query Results XML Format (Second Edition)</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-entailment-20130321">SPARQL 1.1 Entailment Regimes</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-protocol-20130321">SPARQL 1.1 Protocol</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-http-rdf-update-20130321">SPARQL 1.1 Graph Store HTTP Protocol</a></li>
+    </ol>
+    <h4 class="no-toc no-num" id="status-changes">No Substantive Changes</h4>
+    <p>There have been no substantive changes to this document since the <a href="http://www.w3.org/TR/2012/PR-sparql11-federated-query-20121108/">previous version</a>. Minor editorial changes, if
+    any, are detailed in the <a href="#changes-since-pr">change log</a> and visible in the <a href="https://www.w3.org/TR/2013/REC-sparql11-federated-query-20130321/diff">color-coded diff</a>.</p>
+    <h4 class="no-toc no-num" id="please">Please Send Comments</h4>
+    <p>Please send any comments to <a class="mailto" href="mailto:public-rdf-dawg-comments@w3.org">public-rdf-dawg-comments@w3.org</a> (<a class="http" href=
+    "http://lists.w3.org/Archives/Public/public-rdf-dawg-comments/">public archive</a>). Although work on this document by the <a href="http://www.w3.org/2009/sparql/">SPARQL Working Group</a> is
+    complete, comments may be addressed in the <a href="http://www.w3.org/2013/sparql-errata">errata</a> or in future revisions. Open discussion is welcome at <a class="mailto" href=
+    "mailto:public-sparql-dev@w3.org">public-sparql-dev@w3.org</a> (<a class="http" href="http://lists.w3.org/Archives/Public/public-sparql-dev/">public archive</a>).</p>
+    <h4 class="no-toc no-num" id="endorsement">Endorsed By W3C</h4>
+    <p><em>This document has been reviewed by W3C Members, by software developers, and by other W3C groups and interested parties, and is endorsed by the Director as a W3C Recommendation. It is a
+    stable document and may be used as reference material or cited from another document. W3C's role in making the Recommendation is to draw attention to the specification and to promote its
+    widespread deployment. This enhances the functionality and interoperability of the Web.</em></p>
+    <h4 id="patents">Patents</h4>
+    <p><em>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>. W3C maintains a <a href=
+    "http://www.w3.org/2004/01/pp-impl/35463/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes
+    instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href=
+    "http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href=
+    "http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>.</em></p>
+  </div>
+  <div class="toc">
+    <h2><a name="contents" id="contents"></a>Table of Contents</h2>
+    <p class="toc">1 <a href="#introduction">Introduction</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;1.1 <a href="#docConventions">Document Conventions</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.1 <a href="#docNamespaces">Namespaces</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.2 <a href="#docResultDesc">Result Descriptions</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.3 <a href="#docTerminology">Terminology</a><br>
+    2 <a href="#service">SPARQL 1.1 Federated Query Extension</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;2.1 <a href="#simpleService">Simple query to a remote SPARQL endpoint</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;2.2 <a href="#optionalTwoServices">SPARQL query with OPTIONAL to two remote SPARQL endpoints</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;2.3 <a href="#serviceFailure">Service Execution Failure</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;2.4 <a href="#values">Interplay of SERVICE and VALUES (Informative)</a><br>
+    3 <a href="#fedSemantics">SPARQL 1.1 Simple Federation Extension: semantics</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;3.1 <a href="#defn_service">Translation to the SPARQL Algebra</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;3.2 <a href="#algebra_service">SPARQL 1.1 Simple Federation Extension Algebra</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1 <a href="#algebra_service_examples">SERVICE Examples</a><br>
+    4 <a href="#variableService">SERVICE Variables (Informative)</a><br>
+    5 <a href="#conformance">Conformance</a><br>
+    6 <a href="#security">Security Considerations (Informative)</a><br></p>
+    <h3><a name="appendices" id="appendices"></a>Appendices</h3>
+    <p class="toc">A <a href="#sec-bibliography">References</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;A.1 <a href="#sec-normative-refs">Normative References</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;A.2 <a href="#sec-non-normative-refs">Other References</a><br>
+    B <a href="#sec-acknowledgements">Acknowledgements</a><br>
+    C <a href="#sec-cvsLog">CVS History (Last Call and after)</a><br></p>
+  </div>
+  <hr>
+  <div class="body">
+    <div class="div1">
+      <h2><a name="introduction" id="introduction"></a>1 Introduction</h2>
       <p>The growing number of SPARQL query services offer data consumers an opportunity to merge data distributed across the Web. This specification defines the syntax and semantics of the
       <code>SERVICE</code> extension to the SPARQL 1.1 Query Language. This extension allows a query author to direct a portion of a query to a particular SPARQL endpoint. Results are returned to the
       federated query processor and are combined with results from the rest of the query.</p>
-      <section id="docConventions">
-        <h3>Document Conventions</h3>
-        <section id="docNamespaces">
-          <h4>Namespaces</h4>
+      <div class="div2">
+        <h3><a name="docConventions" id="docConventions"></a>1.1 Document Conventions</h3>
+        <div class="div3">
+          <h4><a name="docNamespaces" id="docNamespaces"></a>1.1.1 Namespaces</h4>
           <p>This document uses the same namespaces as from the <a class="inform" href="http://www.w3.org/TR/2011/WD-sparql11-query-20110512/#docNamespaces">SPARQL 1.1 Query document</a>.</p>
-        </section>
-        <section id="docResultDesc">
-          <h4>Result Descriptions</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="docResultDesc" id="docResultDesc"></a>1.1.2 Result Descriptions</h4>
           <p>Result sets are illustrated in tabular form as in the <a class="inform" href="http://www.w3.org/TR/2011/WD-sparql11-query-20110512/#docResultDesc">SPARQL 1.1 Query document</a>.</p>
           <div class="result">
-            <span class="doc-ref" id="table39"></span>
+            <a name="table39" id="table39"></a>
             <table class="resultTable">
               <tbody>
                 <tr>
@@ -162,9 +182,9 @@
           are three variables: <code>x</code>, <code>y</code> and <code>z</code> (shown as column headers). Each solution is shown as one row in the body of the table.&nbsp; Here, there is a single
           solution, in which variable <code>x</code> is bound to <code>"Alice"</code>, variable <code>y</code> is bound to <code>http://example/a</code>, and variable <code>z</code> is not bound to
           an RDF term. Variables are not required to be bound in a solution.</p>
-        </section>
-        <section id="docTerminology">
-          <h4>Terminology</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="docTerminology" id="docTerminology"></a>1.1.3 Terminology</h4>
           <p>The following terms are defined in <a class="norm" href="http://www.w3.org/TR/sparql11-query/">SPARQL 1.1 Query Language</a> <a href="#SQRY">[SQRY]</a> and reused in this document:</p>
           <ul>
             <li><a class="type IRI" href="http://www.w3.org/TR/2004/REC-rdf-concepts-20040210/#dfn-URI-reference">IRI</a> (corresponds to the Concepts and Abstract Syntax term <code>RDF URI
@@ -172,15 +192,15 @@
             <li><a class="type SolutionMapping" href="http://www.w3.org/TR/sparql11-query/#defn_sparqlSolutionMapping">Solution Mapping</a></li>
             <li><a class="type SolutionSequence" href="http://www.w3.org/TR/sparql11-query/#defn_sparqlSolutionSequence">Solution Sequence</a></li>
           </ul>
-        </section>
-      </section>
-    </section>
-    <section id="service">
-      <h2>SPARQL 1.1 Federated Query Extension</h2>
+        </div>
+      </div>
+    </div>
+    <div class="div1">
+      <h2><a name="service" id="service"></a>2 SPARQL 1.1 Federated Query Extension</h2>
       <p>The <code>SERVICE</code> keyword instructs a federated query processor to invoke a portion of a SPARQL query against a remote SPARQL endpoint. This section presents examples of how to use
       the <code>SERVICE</code> keyword. The following sections define the syntax and semantics of this extension.</p>
-      <section id="simpleService">
-        <h3>Simple query to a remote SPARQL endpoint</h3>
+      <div class="div2">
+        <h3><a name="simpleService" id="simpleService"></a>2.1 Simple query to a remote SPARQL endpoint</h3>
         <div class="exampleGroup" id="fooService1">
           <p>This example shows how to query a remote SPARQL endpoint and join the returned data with the data from the local RDF Dataset. Consider a query to find the names of the people we know.
           Data about the names of various people is available at the <code>http://people.example.org/sparql</code> endpoint:</p>
@@ -206,7 +226,7 @@ WHERE
             <p>This query, on the data above, has one solution:</p>
             <p>Query Result:</p>
             <div class="result">
-              <span class="doc-ref" id="table1"></span>
+              <a name="table1" id="table1"></a>
               <table class="resultTable">
                 <tbody>
                   <tr>
@@ -220,9 +240,9 @@ WHERE
             </div>
           </div>
         </div>
-      </section>
-      <section id="optionalTwoServices">
-        <h3>SPARQL query with OPTIONAL to two remote SPARQL endpoints</h3>
+      </div>
+      <div class="div2">
+        <h3><a name="optionalTwoServices" id="optionalTwoServices"></a>2.2 SPARQL query with OPTIONAL to two remote SPARQL endpoints</h3>
         <p>Imagine we want to query people and optionally obtain their interests and the names of people they know. Imagine for instance, two endpoints containing data about people:</p>
         <div class="exampleGroup" id="optionalService1">
           <p>Data in the default graph at remote SPARQL endpoint: <code>http://people.example.org/sparql</code></p>
@@ -262,7 +282,7 @@ WHERE
             <p>This query, on the data above, has three solutions:</p>
             <p>Query Result:</p>
             <div class="result">
-              <span class="doc-ref" id="table03"></span>
+              <a name="table03" id="table03"></a>
               <table class="resultTable">
                 <tbody>
                   <tr>
@@ -292,9 +312,9 @@ WHERE
         </div>
         <p>Notice that in the query above there is a nested <code>SERVICE</code> in the <code>OPTIONAL</code> clause. This query requires the SPARQL query service at
         <code>http://people.example.org/sparql</code> to support basic federated query.</p>
-      </section>
-      <section id="serviceFailure">
-        <h3>Service Execution Failure</h3>
+      </div>
+      <div class="div2">
+        <h3><a name="serviceFailure" id="serviceFailure"></a>2.3 Service Execution Failure</h3>
         <p>The execution of a <code>SERVICE</code> pattern may fail due to several reasons: the remote service may be down, the service IRI may not be dereferenceable, or the endpoint may return an
         error to the query. Normally, under such circumstances the invoked query containing a <code>SERVICE</code> pattern fails as a whole. Queries may explicitly allow failed <code>SERVICE</code>
         requests with the use of the <code>SILENT</code> keyword. The <code>SILENT</code> keyword indicates that errors encountered while accessing a remote SPARQL endpoint should be ignored while
@@ -315,7 +335,7 @@ WHERE
 }</pre>
             <p>Query result if an error occurs while querying the remote SPARQL endpoint:</p>
             <div class="result">
-              <span class="doc-ref" id="table2"></span>
+              <a name="table2" id="table2"></a>
               <table class="resultTable">
                 <tbody>
                   <tr>
@@ -329,9 +349,9 @@ WHERE
             </div>
           </div>
         </div>
-      </section>
-      <section id="values">
-        <h3>Interplay of SERVICE and VALUES (Informative)</h3>
+      </div>
+      <div class="div2">
+        <h3><a name="values" id="values"></a>2.4 Interplay of SERVICE and VALUES (Informative)</h3>
         <p>SPARQL 1.1 Query includes the <code>VALUES</code> clause (<a class="inform" href="http://www.w3.org/TR/sparql11-query/#inline-data">VALUES</a>), which can be used to provide an unordered
         solution sequence that is joined with the results of the query evaluation. Implementers of SPARQL 1.1 Federated Query may use the <code>VALUES</code> clause to constrain the results received
         from a remote endpoint based on solution bindings from evaluating other parts of the query.</p>
@@ -387,7 +407,7 @@ SELECT ?s
           <p>This query, on the data above, has two solutions:</p>
           <p>Query Result:</p>
           <div class="result">
-            <span class="doc-ref" id="table04a"></span>
+            <a name="table04a" id="table04a"></a>
             <table class="resultTable">
               <tbody>
                 <tr>
@@ -420,7 +440,7 @@ SELECT ?s ?o
           <p>This query, on the data above using <code>VALUES</code>, has the expected two solutions to the overall query:</p>
           <p>Query Result:</p>
           <div class="result">
-            <span class="doc-ref" id="table04b"></span>
+            <a name="table04b" id="table04b"></a>
             <table class="resultTable">
               <tbody>
                 <tr>
@@ -439,12 +459,12 @@ SELECT ?s ?o
             </table>
           </div>
         </div>
-      </section>
-    </section>
-    <section id="fedSemantics">
-      <h2>SPARQL 1.1 Simple Federation Extension: semantics</h2>
-      <section id="defn_service">
-        <h3>Translation to the SPARQL Algebra</h3>
+      </div>
+    </div>
+    <div class="div1">
+      <h2><a name="fedSemantics" id="fedSemantics"></a>3 SPARQL 1.1 Simple Federation Extension: semantics</h2>
+      <div class="div2">
+        <h3><a name="defn_service" id="defn_service"></a>3.1 Translation to the SPARQL Algebra</h3>
         <p>The <code>SERVICE</code> extension is defined as an additional type of GroupGraphPattern, with an accompanying addition to SPARQL Query 1.1's <a href=
         "http://www.w3.org/TR/sparql11-query/#convertGraphPattern">Transform (syntax form)</a>:</p>
         <blockquote>
@@ -497,13 +517,13 @@ If FS is not empty:
 
 The result is G.
             </pre>
-      </section>
-      <section id="algebra_service">
-        <h3>SPARQL 1.1 Simple Federation Extension Algebra</h3>
+      </div>
+      <div class="div2">
+        <h3><a name="algebra_service" id="algebra_service"></a>3.2 SPARQL 1.1 Simple Federation Extension Algebra</h3>
         <p>The evaluation of <code>SERVICE</code> is defined in terms of the <a class="inform" href="http://www.w3.org/TR/rdf-sparql-XMLres/">SPARQL Results</a> [<a href="#RESULTS">RESULTS</a>]
         returned by a SPARQL Protocol [<a href="#SPROT">SPROT</a>] execution of the nested graph pattern:</p>
         <div class="defn">
-          <p><strong>Definition: <span class="doc-ref" id="defn_evalService">Evaluation of a Service Pattern</span></strong></p>Let
+          <p><strong>Definition: <a id="defn_evalService" name="defn_evalService">Evaluation of a Service Pattern</a></strong></p>Let
           <ul>
             <li>iri be an IRI,</li>
             <li><code>Ω<sub>0</sub></code> the solution set with one empty solution, and</li>
@@ -520,8 +540,8 @@ The result is G.
             <li>error.</li>
           </ul>
         </div>
-        <section id="algebra_service_examples">
-          <h4>SERVICE Examples</h4>
+        <div class="div3">
+          <h4><a name="algebra_service_examples" id="algebra_service_examples"></a>3.2.1 SERVICE Examples</h4>
           <p>In the folowing section we introduce two examples showing the evaluation of <code>SERVICE</code> patterns in the SPARQL algebra:</p>
           <p>Example: a <code>SERVICE</code> graph pattern in a series of joins:</p>
           <div class="algExample">
@@ -545,11 +565,11 @@ The result is G.
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BGP( ?s :p3 ?v2 ) )
             </div>
           </div>
-        </section>
-      </section>
-    </section>
-    <section id="variableService">
-      <h2>SERVICE Variables (Informative)</h2>
+        </div>
+      </div>
+    </div>
+    <div class="div1">
+      <h2><a name="variableService" id="variableService"></a>4 SERVICE Variables (Informative)</h2>
       <p>In the this section we do not present official evaluation semantics for the SPARQL pattern <code>SERVICE VAR</code>. We only provide indications about how the evaluation of the SPARQL
       pattern <code>SERVICE VAR</code> can be evaluated.</p>
       <p>A variable used in place of a service IRI indicates that the service call for any solution depends on that variable's binding in that solution. For instance, the default graph may contain
@@ -599,7 +619,7 @@ WHERE {
         <p>In the following table we present the intuitive solutions for this query with the data above:</p>
         <p>Query Result:</p>
         <div class="result">
-          <span class="doc-ref" id="tableResultsVarEndpoint"></span>
+          <a name="tableResultsVarEndpoint" id="tableResultsVarEndpoint"></a>
           <table class="resultTable">
             <tbody>
               <tr>
@@ -634,104 +654,97 @@ WHERE {
 ?project doap:name ?projectName . }</pre>
       <p>Note that blank nodes are unique to any document which serializes them. Also, <code>SERVICE</code> calls depend on the SPARQL Protocol [<a href="#SPROT">SPROT</a>] which transfers serialized
       RDF documents making blank nodes unique between service calls.</p>
-    </section>
-    <section id="conformance">
-      <h2>Conformance</h2>
+    </div>
+    <div class="div1">
+      <h2><a name="conformance" id="conformance"></a>5 Conformance</h2>
       <p>See section 4 <a href="http://www.w3.org/TR/sparql11-query/#grammar">SPARQL 1.1 Federated Query Grammar</a> regarding conformance of <a href=
       "http://www.w3.org/TR/sparql11-query/#defn_SPARQLQueryString">SPARQL Query strings</a> that include the SPARQL 1.1 Federated Query Extensions. See section 3.1 <a href="#defn_service">Definition
       of SERVICE</a> for conformance of query results for the <code>SERVICE</code> keyword.</p>
       <p>This specification is intended for use in conjunction with the <a href="http://www.w3.org/TR/sparql11-query/">SPARQL 1.1 Query Language</a>. See that specification for its conformance
       criteria.</p>
-    </section>
-    <section id="security-original">
-      <h2>Security Considerations (Informative)</h2>
+    </div>
+    <div class="div1">
+      <h2><a name="security" id="security"></a>6 Security Considerations (Informative)</h2>
       <p>SPARQL queries using <code>SERVICE</code> imply that a URI will be dereferenced, and that the result will be incorporated into a working data set. All of the security issues of <a class=
       "norm" href="http://www.w3.org/TR/sparql11-protocol/#policy-security">SPARQL Protocol 1.1</a> [<a href="#SPROT">SPROT</a>] Section 3.1 <a class="norm" href=
-      "http://www.w3.org/TR/sparql11-query/#security-original">SPARQL 1.1 Query</a> [<a href="#SQRY">SQRY</a>] Section 21, and <a class="norm" href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource
+      "http://www.w3.org/TR/sparql11-query/#security">SPARQL 1.1 Query</a> [<a href="#SQRY">SQRY</a>] Section 21, and <a class="norm" href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource
       Identifier (URI): Generic Syntax</a> [<a href="#rfc3986">RFC3986</a>] Section 7 should be considered.</p>
-    </section>
-    <section id="sec-bibliography">
-      <h2>References</h2>
-      <section id="sec-normative-refs">
-        <h3>Normative References</h3>
+    </div>
+  </div>
+  <div class="back">
+    <div class="div1">
+      <h2><a name="sec-bibliography" id="sec-bibliography"></a>A References</h2>
+      <div class="div2">
+        <h3><a name="sec-normative-refs" id="sec-normative-refs"></a>A.1 Normative References</h3>
         <dl class="bib">
-          <dt><span class="doc-ref" id="SQRY">[SQRY]</span></dt>
+          <dt><a id="SQRY" name="SQRY">[SQRY]</a></dt>
           <dd><cite><a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321">SPARQL 1.1 Query Language</a></cite>, S. Harris, A. Seaborne, Editors, W3C Recommendation, 21 March 2013,
           http://www.w3.org/TR/2013/REC-sparql11-query-20130321. <a href="http://www.w3.org/TR/sparql11-query/" title="Latest version of SPARQL 1.1 Query Language">Latest version</a> available at
           http://www.w3.org/TR/sparql11-query.</dd>
-          <dt><span class="doc-ref" id="SPROT">[SPROT]</span></dt>
+          <dt><a id="SPROT" name="SPROT">[SPROT]</a></dt>
           <dd><cite><a href="http://www.w3.org/TR/2013/REC-sparql11-protocol-20130321">SPARQL 1.1 Protocol</a></cite>, L. Feigenbaum, G. Williams, K. Clark, E. Torres, Editors, W3C Recommendation, 21
           March 2013, http://www.w3.org/TR/2013/REC-sparql11-protocol-20130321. <a href="http://www.w3.org/TR/sparql11-protocol/" title="Latest version of SPARQL 1.1 Protocol">Latest version</a>
           available at http://www.w3.org/TR/sparql11-protocol.</dd>
-          <dt><span class="doc-ref" id="CHARMOD">[CHARMOD]</span></dt>
+          <dt><a name="CHARMOD" id="CHARMOD">[CHARMOD]</a></dt>
           <dd>Character Model for the World Wide Web 1.0: Fundamentals, R. Ishida, F. Yergeau, M. J. Düst, M. Wolf, T. Texin, Editors, W3C Recommendation, 15 February 2005,
           http://www.w3.org/TR/2005/REC-charmod-20050215/ . <a href="http://www.w3.org/TR/charmod/" title="Latest version of Character Model for the World Wide Web 1.0: Fundamentals">Latest
           version</a> available at http://www.w3.org/TR/charmod/ .</dd>
-          <dt><span class="doc-ref" id="rfc3629">[RFC3629]</span></dt>
+          <dt><a name="rfc3629" id="rfc3629">[RFC3629]</a></dt>
           <dd>RFC 3629 UTF-8, a transformation format of ISO 10646, F. Yergeau November 2003</dd>
-          <dt><span class="doc-ref" id="rfc3986">[RFC3986]</span></dt>
+          <dt><a name="rfc3986" id="rfc3986">[RFC3986]</a></dt>
           <dd>RFC 3986 Uniform Resource Identifier (URI): Generic Syntax, T. Berners-Lee, R. Fielding, L. Masinter January 2005</dd>
-          <dt><span class="doc-ref" id="rfc3987">[RFC3987]</span></dt>
+          <dt><a name="rfc3987" id="rfc3987">[RFC3987]</a></dt>
           <dd><a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987</a>, "Internationalized Resource Identifiers (IRIs)", M. Dürst , M. Suignard</dd>
-          <dt><span class="doc-ref" id="UNICODE">[UNICODE]</span></dt>
+          <dt><a name="UNICODE" id="UNICODE">[UNICODE]</a></dt>
           <dd>The Unicode Standard, Version 4. ISBN 0-321-18578-1, as updated from time to time by the publication of new versions. The latest version of Unicode and additional information on
           versions of the standard and of the Unicode Character Database is available at <a href=
           "http://www.unicode.org/unicode/standard/versions/">http://www.unicode.org/unicode/standard/versions/</a>.</dd>
-          <dt><span class="doc-ref" id="XML11">[XML11]</span></dt>
+          <dt><a name="XML11" id="XML11">[XML11]</a></dt>
           <dd>Extensible Markup Language (XML) 1.1, J. Cowan, J. Paoli, E. Maler, C. M. Sperberg-McQueen, F. Yergeau, T. Bray, Editors, W3C Recommendation, 4 February 2004,
           http://www.w3.org/TR/2004/REC-xml11-20040204/ . <a href="http://www.w3.org/TR/xml11/" title="Latest version of Extensible Markup Language (XML) 1.1">Latest version</a> available at
           http://www.w3.org/TR/xml11/ .</dd>
-          <dt><span class="doc-ref" id="BCP47">[BCP47]</span></dt>
+          <dt><a name="BCP47" id="BCP47">[BCP47]</a></dt>
           <dd>Best Common Practice 47, P. V. Biron, A. Malhotra, Editors, W3C Recommendation, 28 October 2004, http://www.rfc-editor.org/rfc/bcp/bcp47.txt .</dd>
         </dl>
-      </section>
-      <section id="sec-non-normative-refs">
-        <h3>Other References</h3>
+      </div>
+      <div class="div2">
+        <h3><a name="sec-non-normative-refs" id="sec-non-normative-refs"></a>A.2 Other References</h3>
         <dl class="bib">
-          <dt><span class="doc-ref" id="RESULTS">[RESULTS]</span></dt>
+          <dt><a name="RESULTS" id="RESULTS">[RESULTS]</a></dt>
           <dd><cite><a href="http://www.w3.org/TR/2013/REC-rdf-sparql-XMLres-20130321">SPARQL Query Results XML Format (Second Edition)</a></cite>, D. Beckett, J. Broekstra, Editors, W3C
           Recommendation, 21 March 2013, http://www.w3.org/TR/2013/REC-rdf-sparql-XMLres-20130321. <a href="http://www.w3.org/TR/rdf-sparql-XMLres/" title=
           "Latest version of SPARQL Query Results XML Format (Second Edition)">Latest version</a> available at http://www.w3.org/TR/rdf-sparql-XMLres.</dd>
-          <dt><span class="doc-ref" id="TURTLE">[TURTLE]</span></dt>
+          <dt><a name="TURTLE" id="TURTLE">[TURTLE]</a></dt>
           <dd><cite><a href="http://www.w3.org/TR/2013/CR-turtle-20130219/">Turtle: Terse RDF Triple Language</a></cite>, E Prud'hommeaux, G Carothers, Editors, W3C Candidate Recommendation, 19
           February 2013, http://www.w3.org/TR/2013/CR-turtle-20130219/. <a href="http://www.w3.org/TR/turtle/" title="Latest version of Turtle">Latest version</a> available at
           http://www.w3.org/TR/turtle/.</dd>
         </dl>
-      </section>
-    </section>
-    <section id="sec-acknowledgements">
-      <h2>Acknowledgements</h2>
+      </div>
+    </div>
+    <div class="div1">
+      <h2><a name="sec-acknowledgements" id="sec-acknowledgements"></a>B Acknowledgements</h2>
       <p>The SPARQL 1.1 Federated Query document is a product of the whole of the <a href="http://www.w3.org/2009/sparql/wiki/Main_Page">W3C SPARQL Working Group</a>, and our thanks for discussions,
       comments and reviews go to all present and past members.</p>
       <p>In addition, we have had comments and discussions with many people through the working group comments list. All comments go to making a better document. Carlos would also like to
       particularly thank Jorge Pérez, Oscar Corcho and Marcelo Arenas for their discussions on the syntax and semantics of the Federated query extension.</p>
-    </section>
-    <section id="sec-cvsLog">
-      <h2>CVS History (Last Call and after)</h2>
-    </section>
-    
-<!-- BODY -->
-    <section id="privacy">
-      <h2>Privacy Considerations</h2>
-      <p>TODO</p>
-    </section>
-
-    <section id="security">
-      <h2>Security Considerations</h2>
-      <p>TODO</p>
-    </section>
-
-    <section id="internationalization">
-      <h2>Internationalization Considerations</h2>
-      <p>TODO</p>                
-    </section>
-
-    <section class="appendix informative" id="changes-from-sparql11">
-      <h2>Change Log</h2>
-      <p>TODO</p>
-    </section>   
-
-    <section id="index"></section>
-
-  </body>
+    </div>
+    <div class="div1">
+      <h2><a name="sec-cvsLog" id="sec-cvsLog"></a>C CVS History (Last Call and after)</h2>
+    </div>
+    <div>
+      <h2 id="changelog">Change Log</h2>
+      <h3 id="changes-since-pr">Changes since Proposed Recommendation</h3>
+      <ul>
+        <li>None</li>
+      </ul>
+      <h3 id="changes-since-lc">Changes since Last Call</h3>
+      <ul>
+        <li>Updated references, fix DOAP URL</li>
+        <li>Changed the word "BINDINGS" to "VALUES" to match change in Query Specification.</li>
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript" async src="SPARQL%201.1%20Federated%20Query_files/matomo.js"></script>
+  <script type="application/javascript" src="SPARQL%201.1%20Federated%20Query_files/fixup.js"></script>
+</body>
 </html>
