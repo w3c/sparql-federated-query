@@ -642,37 +642,47 @@ SELECT ?s
         <pre class="query">PREFIX foaf:   &lt;http://xmlns.com/foaf/0.1/&gt;
 PREFIX : &lt;http://example.org/&gt;
 SELECT * {?s foaf:knows ?o } VALUES (?s) { (:a) (:b) }</pre>
-        <p>The query process involving <code>SERVICE</code> limits the data returned to the data it needs for the overall query:</p>
-        <div class="queryGroup">
-          <p>Query:</p>
-          <pre class="query">PREFIX foaf:   &lt;http://xmlns.com/foaf/0.1/&gt;
-SELECT ?s ?o
-{
-  ?s a foaf:Person
-  SERVICE &lt;http://example.org/sparql&gt; {?s foaf:knows ?o }
-} 
-</pre>
-          <p>This query, on the data above using <code>VALUES</code>, has the expected two solutions to the overall query:</p>
-          <p>Query Result:</p>
-          <div class="result">
-            <span class="doc-ref" id="table04b"></span>
-            <table class="resultTable">
-              <tbody>
-                <tr>
-                  <th>s</th>
-                  <th>o</th>
-                </tr>
-                <tr>
-                  <td>&lt;http://example.org/a&gt;</td>
-                  <td>&lt;http://example.org/b&gt;</td>
-                </tr>
-                <tr>
-                  <td>&lt;http://example.org/b&gt;</td>
-                  <td>&lt;http://example.org/c&gt;</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <p>This query on &lt;http://example.org/sparql&gt; has two solutions:</p>
+        <p>Query Result:</p>
+        <div class="result">
+          <span class="doc-ref" id="table04b"></span>
+          <table class="resultTable">
+            <tbody>
+              <tr>
+                <th>s</th>
+                <th>o</th>
+              </tr>
+              <tr>
+                <td>&lt;http://example.org/a&gt;</td>
+                <td>&lt;http://example.org/b&gt;</td>
+              </tr>
+              <tr>
+                <td>&lt;http://example.org/b&gt;</td>
+                <td>&lt;http://example.org/c&gt;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Both intermediary solution sequences can now be joined together, and projected to the requested variables to get to the expected two solution mappings:</p>
+        <div class="result">
+          <span class="doc-ref" id="table04c"></span>
+          <table class="resultTable">
+            <tbody>
+              <tr>
+                <th>s</th>
+                <th>o</th>
+              </tr>
+              <tr>
+                <td>&lt;http://example.org/a&gt;</td>
+                <td>&lt;http://example.org/b&gt;</td>
+              </tr>
+              <tr>
+                <td>&lt;http://example.org/b&gt;</td>
+                <td>&lt;http://example.org/c&gt;</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
     </section>
@@ -949,6 +959,7 @@ WHERE {
       <h2>Changes between SPARQL 1.1 Federated Query and SPARQL 1.2 Federated Query</h2>
       <ul>
         <li>Refer to RDF as a data model instead of data format in <a href="#abstract" class="sectionRef"></a></li>
+        <li><a href="https://www.w3.org/2013/sparql-errata#errata-fq-1">errata-fq-1</a>: Incorrect example in <a href="#values">interplay of SERVICE and VALUES example</a></li>
       </ul>
     </section>
     
