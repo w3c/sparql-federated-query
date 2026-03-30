@@ -1,7 +1,7 @@
 
 # Specification 'sparql-federated-query'
 
-This is the repository for the **_SPAQL Federated Query_** deliverable of the [RDF-star Working Group](https://www.w3.org/groups/wg/rdf-star).
+This is the repository for the **_SPARQL Federated Query_** deliverable of the [RDF-star Working Group](https://www.w3.org/groups/wg/rdf-star).
 The editors’ draft of the specification can also be [read directly](https://w3c.github.io/sparql-federated-query/spec/).
 
 ## Contributing to the Repository
